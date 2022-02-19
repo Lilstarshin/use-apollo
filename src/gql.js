@@ -1,49 +1,70 @@
 // @ts-check
 const { ApolloServer, gql } = require('apollo-server');
+const { userInfo } = require('os');
+const { sequelize, User, City } = require('./sequelize');
 
-// A schema is a collection of type definitions (hence "typeDefs")
-// that together define the "shape" of queries that are executed against
-// your data.
 const typeDefs = gql`
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
-
-  # This "Book" type defines the queryable fields for every book in our data source.
-  type Book {
-    title: String
-    author: String
+  type User {
+    id: Int!
+    name: String!
+    age: Int!
+    city: City
   }
-
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
+  type City {
+    id: Int!
+    name: String!
+    users: [User]
+  }
   type Query {
-    books: [Book]
+    users: [User]
   }
 `;
-const books = [
-  {
-    title: 'The Awakening',
-    author: 'Kate Chopin',
-  },
-  {
-    title: 'City of Glass',
-    author: 'Paul Auster',
-  },
-];
 
-// Resolvers define the technique for fetching the types defined in the
-// schema. This resolver retrieves books from the "books" array above.
 const resolvers = {
   Query: {
-    books: () => books,
+    users: async () => User.findAll(),
+  },
+
+  User: {
+    city: async (user) =>
+      City.findOne({
+        where: {
+          id: user.cityId,
+        },
+      }),
+  },
+  City: {
+    users: async (city) =>
+      User.findAll({
+        where: {
+          cityId: city.id,
+        },
+      }),
   },
 };
 
-// The ApolloServer constructor requires two parameters: your schema
-// definition and your set of resolvers.
-const server = new ApolloServer({ typeDefs, resolvers });
+async function main() {
+  await sequelize.sync({ force: true });
+  const Seoul = await City.build({
+    name: 'Seoul',
+  }).save();
 
-// The `listen` method launches a web server.
-server.listen(4000).then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+  await User.build({
+    age: 26,
+    name: 'Coco',
+    cityId: Seoul.getDataValue('id'),
+  }).save();
+  await User.build({
+    age: 30,
+    name: 'Eoeo',
+    cityId: Seoul.getDataValue('id'),
+  }).save();
+
+  const server = new ApolloServer({ typeDefs, resolvers });
+
+  server.listen(4000).then(({ url }) => {
+    console.log(`🚀  Server ready at ${url}`);
+  });
+}
+
+main();
