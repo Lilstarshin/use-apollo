@@ -1,0 +1,60 @@
+{
+  "scripts": {
+    "seq": "sequelize-cli",
+    "lint": "eslint src/**/*"
+  },
+  "engines": {
+    "node": "16.13.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^17.0.17",
+    "@types/supertest": "^2.0.11",
+    "eslint": "^8.8.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1",
+    "supertest": "^6.2.2",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "commander": "^9.0.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "koa": "^2.13.4",
+    "koa-mount": "^4.0.0",
+    "koa-pug": "^5.0.0",
+    "koa-route": "^3.2.0",
+    "koa-static": "^5.0.0",
+    "koa-websocket": "^6.0.0",
+    "mongodb": "^4.3.1",
+    "multer": "^1.4.4",
+    "pg": "^8.7.3",
+    "prompts": "^2.4.2",
+    "pug": "^3.0.2",
+    "sequelize": "^6.16.1",
+    "sequelize-cli": "^6.4.1",
+    "static": "^2.0.0",
+    "tailwindcss": "^3.0.22"
+  },
+  "name": "use-sequelize",
+  "version": "0.1.0",
+  "main": "ecosystem.config.js",
+  "author": "lilstar",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lilstarshin/use-sequelize.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lilstarshin/use-sequelize/issues"
+  },
+  "homepage": "https://github.com/Lilstarshin/use-sequelize#readme",
+  "description": ""
+}
