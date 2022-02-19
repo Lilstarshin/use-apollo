@@ -1,7 +1,8 @@
 {
   "scripts": {
     "seq": "sequelize-cli",
-    "lint": "eslint src/**/*"
+    "lint": "eslint src/**/*",
+    "server": "nodemon src/gql.js"
   },
   "engines": {
     "node": "16.13.2"
@@ -23,10 +24,12 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "apollo-server": "^3.6.3",
     "body-parser": "^1.19.1",
     "commander": "^9.0.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
+    "graphql": "^16.3.0",
     "koa": "^2.13.4",
     "koa-mount": "^4.0.0",
     "koa-pug": "^5.0.0",
@@ -43,11 +46,11 @@
     "static": "^2.0.0",
     "tailwindcss": "^3.0.22"
   },
-  "name": "use-sequelize",
+  "name": "use-apollo",
   "version": "0.1.0",
   "main": "ecosystem.config.js",
   "author": "lilstar",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lilstarshin/use-sequelize.git"
